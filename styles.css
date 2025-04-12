@@ -1,65 +1,107 @@
-/* Apply a rainbow gradient background and use a playful font */
-body {
-  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+/* GLOBAL RESET / BOX-SIZING */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  color: #333;
 }
 
-/* Header styling */
+/* BODY STYLING */
+body {
+  /* A fun, animated rainbow-like gradient */
+  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
+  background-size: 400% 400%;
+  animation: gradientBG 10s ease infinite;
+
+  font-family: 'Freckle Face', cursive; /* Kid-friendly, playful font */
+  color: #333;
+  min-height: 100vh;
+}
+
+/* ANIMATED GRADIENT KEYFRAMES */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* HEADER */
 header {
   text-align: center;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2rem 1rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 1rem;
   border-bottom: 3px solid #fff;
 }
 
-/* Gallery container */
+header h1 {
+  font-size: 2.5rem;
+  color: #ff69b4; /* Bright pink color for the title */
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.2rem;
+}
+
+/* GALLERY SECTION */
 .gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin: 30px auto;
-  max-width: 1200px;
   gap: 20px;
+  padding: 1rem;
 }
 
-/* Individual card styling */
+/* CARD STYLING */
 .card {
-  background: #fff;
-  border-radius: 15px;
-  padding: 15px;
+  background: rgba(255, 255, 255, 0.8);
   width: 300px;
+  padding: 1rem;
+  border-radius: 15px;
   text-align: center;
-  box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
   transition: transform 0.3s ease;
 }
-
-/* Add a hover effect to lift the card */
 .card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-8px);
 }
 
-/* Card image styling */
+/* CARD IMAGE */
 .card img {
   width: 100%;
   height: auto;
   border-radius: 10px;
+  margin-bottom: 1rem;
 }
 
-/* Headline for each card */
+/* CARD HEADING */
 .card h2 {
-  color: #ff1493;
-  margin-top: 10px;
+  color: #ff69b4;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem;
 }
 
-/* Footer styling */
+/* CARD TEXT */
+.card p {
+  font-size: 1rem;
+  color: #444;
+}
+
+/* FOOTER */
 footer {
   text-align: center;
-  padding: 15px;
-  background-color: rgba(255, 255, 255, 0.8);
-  position: fixed;
-  bottom: 0;
-  width: 100%;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.6);
+  margin-top: 1rem;
+}
+
+footer p {
+  color: #555;
 }
