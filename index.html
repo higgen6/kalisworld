@@ -13,25 +13,21 @@
       animation: rainbow 15s ease infinite;
       color: #333;
     }
-
     @keyframes rainbow {
       0% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
-
     .container {
       padding: 20px;
       max-width: 1000px;
       margin: auto;
     }
-
     h1, h2 {
       text-align: center;
       color: #fff;
       text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     }
-
     .section {
       background-color: rgba(255, 255, 255, 0.9);
       padding: 20px;
@@ -39,14 +35,12 @@
       border-radius: 15px;
       box-shadow: 0 0 10px rgba(0,0,0,0.3);
     }
-
     .image-box {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
     }
-
     .image-card {
       width: 200px;
       background: white;
@@ -55,18 +49,15 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.2);
       text-align: center;
     }
-
     .image-card img {
       width: 100%;
       height: 150px;
       object-fit: cover;
     }
-
     .image-card p {
       padding: 10px;
       font-size: 14px;
     }
-
     button {
       font-size: 16px;
       padding: 10px 20px;
@@ -76,20 +67,17 @@
       cursor: pointer;
       color: white;
     }
+    .btn-primary { background-color: #ff69b4; }
+    .btn-dark { background-color: #444; }
+    .btn-primary:hover { background-color: #ff1493; }
+    .btn-dark:hover { background-color: #222; }
 
-    #clickBtn { background-color: #ff69b4; }
-    #clickBtn:hover { background-color: #ff1493; }
-    #resetBtn { background-color: #444; }
-    #resetBtn:hover { background-color: #222; }
-
-    /* Memory Game */
     .memory-grid {
       display: grid;
       grid-template-columns: repeat(4, 80px);
       gap: 10px;
       justify-content: center;
     }
-
     .memory-card {
       width: 80px;
       height: 80px;
@@ -102,17 +90,38 @@
       border-radius: 8px;
       user-select: none;
     }
-
     .memory-card.matched {
       background-color: #8bc34a;
       color: white;
       pointer-events: none;
     }
 
-    /* Guess Game */
-    #guessOutput {
+    .leaderboard {
       margin-top: 10px;
-      font-weight: bold;
+      background: #eee;
+      padding: 10px;
+      border-radius: 10px;
+    }
+
+    .mole-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 10px;
+      justify-content: center;
+    }
+    .mole {
+      width: 100px;
+      height: 100px;
+      background-color: #aaa;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    .mole.active {
+      background-color: #ff5722;
     }
   </style>
 </head>
@@ -120,134 +129,221 @@
   <div class="container">
     <h1>🌈 Welcome to the Fun Zone! 🎉</h1>
 
-    <!-- Images -->
-    <div class="section">
-      <h2>💅 Nails</h2>
-      <div class="image-box">
-        <div class="image-card">
-          <img src="https://i.imgur.com/Bq9hJx2.jpg" alt="Nails" />
-          <p>These glittery nails sparkle like magic!</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>🥞 Pancakes</h2>
-      <div class="image-box">
-        <div class="image-card">
-          <img src="https://i.imgur.com/3ZQ3Zkf.jpg" alt="Pancakes" />
-          <p>Fluffy pancakes with syrup and berries. Yum!</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="section">
-      <h2>🐶 Dogs</h2>
-      <div class="image-box">
-        <div class="image-card">
-          <img src="https://i.imgur.com/eIrQk2R.jpg" alt="Dog" />
-          <p>This happy pup is ready to play all day!</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Game 1: Clicker -->
+    <!-- GAME 1: Clicker Game -->
     <div class="section">
       <h2>🎮 Rainbow Clicker Game</h2>
-      <p>Score: <span id="score">0</span></p>
-      <button id="clickBtn">Click Me!</button>
-      <button id="resetBtn">Reset</button>
-      <audio id="clickSound" src="https://www.myinstants.com/media/sounds/mario-coin.mp3"></audio>
+      <p>Score: <span id="clickScore">0</span></p>
+      <button class="btn-primary" onclick="addClickScore()">Click Me!</button>
+      <button class="btn-dark" onclick="resetClickGame()">Reset</button>
+      <div class="leaderboard">
+        <h4>🏆 Leaderboard</h4>
+        <ol id="clickerLeaderboard"></ol>
+      </div>
     </div>
 
-    <!-- Game 2: Memory Match -->
+    <!-- GAME 2: Guess the Number -->
+    <div class="section">
+      <h2>🔢 Guess the Number</h2>
+      <input type="number" id="guessInput" min="1" max="100" />
+      <button class="btn-primary" onclick="checkGuess()">Guess</button>
+      <button class="btn-dark" onclick="resetGuessGame()">Reset</button>
+      <p id="guessOutput"></p>
+      <div class="leaderboard">
+        <h4>🏆 Leaderboard</h4>
+        <ol id="guessLeaderboard"></ol>
+      </div>
+    </div>
+
+    <!-- GAME 3: Memory Match -->
     <div class="section">
       <h2>🧠 Memory Match Game</h2>
+      <button class="btn-dark" onclick="resetMemoryGame()">Reset Memory Game</button>
       <div class="memory-grid" id="memoryGrid"></div>
     </div>
 
-    <!-- Game 3: Guess the Number -->
+    <!-- GAME 4: Rock Paper Scissors -->
     <div class="section">
-      <h2>🔢 Guess the Number</h2>
-      <p>Guess a number between 1 and 100:</p>
-      <input type="number" id="guessInput" min="1" max="100">
-      <button onclick="checkGuess()">Submit</button>
-      <p id="guessOutput"></p>
+      <h2>✊ Rock Paper Scissors</h2>
+      <p>Choose your move:</p>
+      <button class="btn-primary" onclick="rps('rock')">Rock</button>
+      <button class="btn-primary" onclick="rps('paper')">Paper</button>
+      <button class="btn-primary" onclick="rps('scissors')">Scissors</button>
+      <p id="rpsOutput"></p>
+    </div>
+
+    <!-- GAME 5: Whack-a-Mole -->
+    <div class="section">
+      <h2>🐹 Whack-a-Mole</h2>
+      <button class="btn-primary" onclick="startMoleGame()">Start Game</button>
+      <button class="btn-dark" onclick="resetMoleGame()">Reset</button>
+      <p>Score: <span id="moleScore">0</span></p>
+      <p>Time left: <span id="moleTime">15</span>s</p>
+      <div class="mole-grid" id="moleGrid"></div>
     </div>
   </div>
 
   <script>
-    // Rainbow Clicker Game
-    let score = 0;
-    const scoreDisplay = document.getElementById("score");
-    const clickBtn = document.getElementById("clickBtn");
-    const resetBtn = document.getElementById("resetBtn");
-    const clickSound = document.getElementById("clickSound");
+    // ========== CLICKER GAME ==========
+    let clickScore = 0;
+    function addClickScore() {
+      clickScore += Math.floor(Math.random() * 5) + 1;
+      document.getElementById("clickScore").innerText = clickScore;
+      saveScore("clickerLeaderboard", clickScore);
+    }
+    function resetClickGame() {
+      clickScore = 0;
+      document.getElementById("clickScore").innerText = 0;
+    }
 
-    clickBtn.addEventListener("click", () => {
-      const points = Math.floor(Math.random() * 5) + 1;
-      score += points;
-      scoreDisplay.textContent = score;
-      clickSound.play();
-    });
-
-    resetBtn.addEventListener("click", () => {
-      score = 0;
-      scoreDisplay.textContent = score;
-    });
-
-    // Memory Match Game
-    const emojis = ['🍎','🍎','🚗','🚗','🐶','🐶','🎈','🎈'];
-    const shuffled = emojis.sort(() => 0.5 - Math.random());
-    const memoryGrid = document.getElementById("memoryGrid");
-
-    let firstCard = null;
-    let lockBoard = false;
-
-    shuffled.forEach((emoji, index) => {
-      const card = document.createElement("div");
-      card.classList.add("memory-card");
-      card.dataset.emoji = emoji;
-      card.innerText = "?";
-      card.addEventListener("click", () => {
-        if (lockBoard || card.classList.contains("matched") || card.innerText !== "?") return;
-        card.innerText = emoji;
-
-        if (!firstCard) {
-          firstCard = card;
-        } else {
-          if (firstCard.dataset.emoji === card.dataset.emoji) {
-            firstCard.classList.add("matched");
-            card.classList.add("matched");
-            firstCard = null;
-          } else {
-            lockBoard = true;
-            setTimeout(() => {
-              firstCard.innerText = "?";
-              card.innerText = "?";
-              firstCard = null;
-              lockBoard = false;
-            }, 1000);
-          }
-        }
-      });
-      memoryGrid.appendChild(card);
-    });
-
-    // Guess the Number Game
-    const secretNumber = Math.floor(Math.random() * 100) + 1;
-    const guessOutput = document.getElementById("guessOutput");
-
+    // ========== GUESS GAME ==========
+    let secretNumber = Math.floor(Math.random() * 100) + 1;
+    let guessAttempts = 0;
     function checkGuess() {
-      const userGuess = parseInt(document.getElementById("guessInput").value);
-      if (userGuess === secretNumber) {
-        guessOutput.innerText = "🎉 You guessed it!";
-      } else if (userGuess < secretNumber) {
-        guessOutput.innerText = "Too low! Try again.";
+      const guess = parseInt(document.getElementById("guessInput").value);
+      guessAttempts++;
+      const output = document.getElementById("guessOutput");
+      if (guess === secretNumber) {
+        output.innerText = `🎉 You guessed it in ${guessAttempts} attempts!`;
+        saveScore("guessLeaderboard", 100 - guessAttempts);
+        guessAttempts = 0;
       } else {
-        guessOutput.innerText = "Too high! Try again.";
+        output.innerText = guess < secretNumber ? "Too low!" : "Too high!";
       }
     }
+    function resetGuessGame() {
+      secretNumber = Math.floor(Math.random() * 100) + 1;
+      guessAttempts = 0;
+      document.getElementById("guessOutput").innerText = "";
+      document.getElementById("guessInput").value = "";
+    }
+
+    // ========== MEMORY GAME ==========
+    let memoryGrid = document.getElementById("memoryGrid");
+    let memoryFirstCard = null;
+    let lockBoard = false;
+    function setupMemoryGame() {
+      memoryGrid.innerHTML = "";
+      let emojis = ['🍎','🍎','🚗','🚗','🐶','🐶','🎈','🎈'].sort(() => 0.5 - Math.random());
+      emojis.forEach(emoji => {
+        const card = document.createElement("div");
+        card.classList.add("memory-card");
+        card.dataset.emoji = emoji;
+        card.innerText = "?";
+        card.onclick = () => {
+          if (lockBoard || card.classList.contains("matched") || card.innerText !== "?") return;
+          card.innerText = emoji;
+          if (!memoryFirstCard) {
+            memoryFirstCard = card;
+          } else {
+            if (memoryFirstCard.dataset.emoji === card.dataset.emoji) {
+              card.classList.add("matched");
+              memoryFirstCard.classList.add("matched");
+              memoryFirstCard = null;
+            } else {
+              lockBoard = true;
+              setTimeout(() => {
+                card.innerText = "?";
+                memoryFirstCard.innerText = "?";
+                memoryFirstCard = null;
+                lockBoard = false;
+              }, 1000);
+            }
+          }
+        };
+        memoryGrid.appendChild(card);
+      });
+    }
+    function resetMemoryGame() {
+      memoryFirstCard = null;
+      setupMemoryGame();
+    }
+    setupMemoryGame();
+
+    // ========== RPS GAME ==========
+    function rps(userMove) {
+      const choices = ['rock', 'paper', 'scissors'];
+      const bot = choices[Math.floor(Math.random() * 3)];
+      let result = "";
+      if (userMove === bot) result = "It's a tie!";
+      else if (
+        (userMove === 'rock' && bot === 'scissors') ||
+        (userMove === 'scissors' && bot === 'paper') ||
+        (userMove === 'paper' && bot === 'rock')
+      ) result = "You win!";
+      else result = "You lose!";
+      document.getElementById("rpsOutput").innerText = `Bot chose ${bot}. ${result}`;
+    }
+
+    // ========== WHACK-A-MOLE ==========
+    let moleScore = 0, moleTimeLeft = 15, moleInterval;
+    const moleGrid = document.getElementById("moleGrid");
+
+    function createMoleGrid() {
+      moleGrid.innerHTML = "";
+      for (let i = 0; i < 9; i++) {
+        const mole = document.createElement("div");
+        mole.classList.add("mole");
+        mole.onclick = () => {
+          if (mole.classList.contains("active")) {
+            moleScore++;
+            document.getElementById("moleScore").innerText = moleScore;
+            mole.classList.remove("active");
+          }
+        };
+        moleGrid.appendChild(mole);
+      }
+    }
+
+    function startMoleGame() {
+      moleScore = 0;
+      moleTimeLeft = 15;
+      document.getElementById("moleScore").innerText = 0;
+      document.getElementById("moleTime").innerText = 15;
+      createMoleGrid();
+
+      moleInterval = setInterval(() => {
+        const moles = document.querySelectorAll(".mole");
+        moles.forEach(m => m.classList.remove("active"));
+        const randomIndex = Math.floor(Math.random() * 9);
+        moles[randomIndex].classList.add("active");
+        moleTimeLeft--;
+        document.getElementById("moleTime").innerText = moleTimeLeft;
+        if (moleTimeLeft <= 0) clearInterval(moleInterval);
+      }, 1000);
+    }
+
+    function resetMoleGame() {
+      clearInterval(moleInterval);
+      moleScore = 0;
+      document.getElementById("moleScore").innerText = 0;
+      document.getElementById("moleTime").innerText = 15;
+      createMoleGrid();
+    }
+    createMoleGrid();
+
+    // ========== LEADERBOARD ==========
+    function saveScore(key, score) {
+      let scores = JSON.parse(localStorage.getItem(key)) || [];
+      scores.push(score);
+      scores.sort((a,b) => b - a);
+      scores = scores.slice(0, 3);
+      localStorage.setItem(key, JSON.stringify(scores));
+      displayLeaderboard(key);
+    }
+
+    function displayLeaderboard(key) {
+      const list = document.getElementById(key);
+      list.innerHTML = "";
+      const scores = JSON.parse(localStorage.getItem(key)) || [];
+      scores.forEach(score => {
+        const li = document.createElement("li");
+        li.textContent = score;
+        list.appendChild(li);
+      });
+    }
+
+    displayLeaderboard("clickerLeaderboard");
+    displayLeaderboard("guessLeaderboard");
   </script>
 </body>
 </html>
