@@ -1,23 +1,22 @@
-/* GLOBAL RESET / BOX-SIZING */
+/* Global Reset */
 * {
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-/* BODY STYLING */
+/* Body with an animated rainbow gradient background */
 body {
-  /* A fun, animated rainbow-like gradient */
-  background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fad0c4, #fbc2eb);
+  background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
   background-size: 400% 400%;
-  animation: gradientBG 10s ease infinite;
-
-  font-family: 'Freckle Face', cursive; /* Kid-friendly, playful font */
-  color: #333;
+  animation: gradientBG 15s ease infinite;
+  font-family: 'Fredoka One', cursive;
+  color: #fff;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-/* ANIMATED GRADIENT KEYFRAMES */
+/* Animate the gradient background */
 @keyframes gradientBG {
   0% {
     background-position: 0% 50%;
@@ -30,78 +29,74 @@ body {
   }
 }
 
-/* HEADER */
+/* Header Styling */
 header {
   text-align: center;
-  padding: 2rem 1rem;
-  background-color: rgba(255, 255, 255, 0.6);
-  margin-bottom: 1rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.5);
   border-bottom: 3px solid #fff;
+  margin-bottom: 1rem;
 }
 
 header h1 {
-  font-size: 2.5rem;
-  color: #ff69b4; /* Bright pink color for the title */
-  margin-bottom: 0.5rem;
+  font-size: 3rem;
+  text-shadow: 2px 2px 5px #000;
 }
 
 header p {
-  font-size: 1.2rem;
+  font-size: 1.5rem;
+  color: #fffd00;
+  margin-top: 0.5rem;
 }
 
-/* GALLERY SECTION */
+/* Gallery Layout */
 .gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  padding: 1rem;
+  padding: 20px;
 }
 
-/* CARD STYLING */
+/* Card Styling */
 .card {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.9);
+  color: #333;
   width: 300px;
-  padding: 1rem;
+  padding: 20px;
   border-radius: 15px;
-  text-align: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease;
 }
+
 .card:hover {
-  transform: translateY(-8px);
+  transform: scale(1.05);
 }
 
-/* CARD IMAGE */
 .card img {
   width: 100%;
-  height: auto;
   border-radius: 10px;
-  margin-bottom: 1rem;
+  margin-bottom: 15px;
 }
 
-/* CARD HEADING */
 .card h2 {
-  color: #ff69b4;
-  margin-bottom: 0.5rem;
-  font-size: 1.8rem;
+  font-family: 'Freckle Face', cursive;
+  font-size: 2rem;
+  color: #d100d1;
+  margin-bottom: 10px;
 }
 
-/* CARD TEXT */
 .card p {
   font-size: 1rem;
-  color: #444;
+  line-height: 1.4;
 }
 
-/* FOOTER */
+/* Footer Styling */
 footer {
   text-align: center;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.6);
-  margin-top: 1rem;
-}
-
-footer p {
-  color: #555;
+  padding: 15px;
+  background: rgba(0, 0, 0, 0.5);
+  border-top: 3px solid #fff;
+  margin-top: 20px;
+  font-size: 1.2rem;
 }
