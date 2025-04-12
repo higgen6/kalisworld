@@ -7,10 +7,116 @@
 
   <!-- Google Fonts for a playful look -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Freckle+Face&family=Fredoka+One&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Freckle+Face&family=Fredoka+One&display=swap"
+    rel="stylesheet"
+  />
 
-  <!-- Link to CSS -->
-  <link rel="stylesheet" href="style.css" />
+  <!-- Inline CSS -->
+  <style>
+    /* Global Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body with an animated rainbow gradient background */
+    body {
+      background: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      font-family: 'Fredoka One', cursive;
+      color: #fff;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animate the gradient background */
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Header Styling */
+    header {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(0, 0, 0, 0.5);
+      border-bottom: 3px solid #fff;
+      margin-bottom: 1rem;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    header p {
+      font-size: 1.5rem;
+      color: #fffd00;
+      margin-top: 0.5rem;
+    }
+
+    /* Gallery Layout */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      padding: 20px;
+    }
+
+    /* Card Styling */
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      color: #333;
+      width: 300px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .card h2 {
+      font-family: 'Freckle Face', cursive;
+      font-size: 2rem;
+      color: #d100d1;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 1rem;
+      line-height: 1.4;
+    }
+
+    /* Footer Styling */
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.5);
+      border-top: 3px solid #fff;
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -47,4 +153,3 @@
   </footer>
 </body>
 </html>
-
